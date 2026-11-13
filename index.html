@@ -59,6 +59,7 @@
   .status[data-k="wait"] .dot { background: #d9a520; }
   .status[data-k="err"] { color: var(--err); }
   .status[data-k="err"] .dot { background: var(--err); }
+  #libretaLink { font-family: var(--ui); font-size: .92rem; }
   .linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--ink-blue); text-decoration: underline; cursor: pointer; }
 
   /* separadores (páginas) */
@@ -347,6 +348,7 @@
     <h1 id="title">Mi cuaderno de recursos<small id="subtitle">cuaderno de recursos</small></h1>
     <div class="head-right">
       <div class="date" id="today"></div>
+      <a class="linkbtn" id="libretaLink" href="https://adelvalle2010.github.io/carpeta-clase/" title="Abrir la Libreta de Clase: asistencia, actividades y notas" hidden>📒 Libreta de Clase</a>
       <div class="status" id="status" hidden><span><span class="dot"></span><span id="statusTxt"></span></span></div>
     </div>
   </header>
@@ -1018,9 +1020,11 @@
 
   function render() {
     stopPz();
+    $('#libretaLink').hidden = true; // solo se muestra a la dueña, nunca en páginas compartidas
     if (mode === 'index') return renderIndex();
     if (mode === 'public') return renderPublic();
     // dueña (local u owner)
+    $('#libretaLink').hidden = false;
     $('#title').firstChild.textContent = 'Mi cuaderno de recursos';
     $('#subtitle').textContent = AUTORA ? `cuaderno de recursos de ${AUTORA}` : 'cuaderno de recursos';
     document.title = 'Mi Cuaderno de Recursos';
